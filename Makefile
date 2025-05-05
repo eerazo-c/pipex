@@ -6,7 +6,7 @@
 #    By: elerazo- <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/15 16:47:26 by elerazo-          #+#    #+#              #
-#    Updated: 2025/04/30 18:07:08 by elerazo-         ###   ########.fr        #
+#    Updated: 2025/05/05 18:35:49 by elerazo-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME		=	pipex
@@ -14,7 +14,7 @@ CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror -I Inc/ 
 OBJDIR		=	build
 SRCSDIR		=	Src
-SRCS		=	main.c
+SRCS		=	pipex.c
 
 LIBFT_PATH	=	library/libft
 PRINTF_PATH =	library/printf

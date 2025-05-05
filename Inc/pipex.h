@@ -6,7 +6,7 @@
 /*   By: elerazo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 17:04:54 by elerazo-          #+#    #+#             */
-/*   Updated: 2025/04/29 15:49:08 by elerazo-         ###   ########.fr       */
+/*   Updated: 2025/05/05 18:58:53 by elerazo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PIPEX_H
@@ -21,6 +21,10 @@
 # include "../library/libft/libft.h"
 
 //structura
+typedef struct s_pipex
+{
+	int	info;
+}				t_pipex;
 
 //prototipo de funciones
 
