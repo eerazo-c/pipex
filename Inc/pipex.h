@@ -6,7 +6,7 @@
 /*   By: elerazo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 17:04:54 by elerazo-          #+#    #+#             */
-/*   Updated: 2025/05/06 23:29:09 by elerazo          ###   ########.fr       */
+/*   Updated: 2025/05/08 23:50:38 by elerazo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PIPEX_H
@@ -14,7 +14,7 @@
 
 //# <biblioteca.h>
 # include <unistd.h>
-# include <limits.h>
+# include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include "../library/printf/ft_printf.h"
@@ -27,6 +27,8 @@ typedef struct s_pipex
 	char	*outfile;
 	char	**cmd1_args;
 	char	**cmd2_args;
+	int		infile_fd;
+	int		outfile_fd;
 	char	**envp;
 }				t_pipex;
 
@@ -34,5 +36,6 @@ typedef struct s_pipex
 int	init_pipex(t_pipex *pipex, char **av, char **envp);
 void	free_pipex(t_pipex *pipex);
 void	free_matriz(char **av);
+int		open_file(t_pipex *pipex, char **av);
 
 #endif
