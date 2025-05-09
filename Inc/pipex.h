@@ -6,7 +6,7 @@
 /*   By: elerazo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 17:04:54 by elerazo-          #+#    #+#             */
-/*   Updated: 2025/05/09 14:58:34 by elerazo-         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:32:55 by elerazo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PIPEX_H
@@ -25,12 +25,12 @@ typedef struct s_pipex
 {
 	char	*infile;
 	char	*outfile;
+	char	**envp;
 	char	**cmd1_args;
 	char	**cmd2_args;
 	int		infile_fd;
 	int		outfile_fd;
 	int		pipe_fd[2];
-	char	**envp;
 }				t_pipex;
 
 //prototipo de funciones

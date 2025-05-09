@@ -6,7 +6,7 @@
 /*   By: elerazo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:30:29 by elerazo-          #+#    #+#             */
-/*   Updated: 2025/05/09 14:30:39 by elerazo-         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:30:19 by elerazo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
@@ -33,8 +33,8 @@ void	free_matriz(char **av)
 	int	i;
 
 	i = 0;
-	if(!av)
-		return;
+	if (!av)
+		return ;
 	while (av[1])
 	{
 		free(av[i]);

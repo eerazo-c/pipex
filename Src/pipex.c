@@ -6,12 +6,12 @@
 /*   By: elerazo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 18:06:15 by elerazo-          #+#    #+#             */
-/*   Updated: 2025/05/09 15:07:36 by elerazo-         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:38:35 by elerazo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
 
-int main(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
 	t_pipex	pipex;
 
