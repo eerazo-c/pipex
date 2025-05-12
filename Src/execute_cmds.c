@@ -29,20 +29,29 @@ void	execute_cmds(t_pipex *pipex)
 	pid_t	pid2;	
 
 	pid1 = fork();
+	if (pid1 < 0)
+	{
+		perror("fork 1");
+		return ;
+	}
 	if (pid1 == 0)
 		execute_first_cmds(pipex);
-	waitpid(pid1, NULL, 0);
 	pid2 = fork();
+	if (pid1 < 0)
+	{
+		perror ("fork 2");
+		return ;
+	}
 	if (pid2 == 0)
 		execute_second_cmds(pipex);
 	close(pipex->pipe_fd[0]);
 	close(pipex->pipe_fd[1]);
+	waitpid(pid1, NULL, 0);
 	waitpid(pid2, NULL, 0);
 }
 
 char	**get_paths(char **envp)
 {
-	char	*path_line;
 	int		i;
 
 	i = 0;
@@ -50,34 +59,44 @@ char	**get_paths(char **envp)
 		i++;
 	if (!envp[i])
 		return (NULL);
-	path_line = envp[i] + 5;
-	return (ft_split(path_line, ':'));
+	return (ft_split(envp[i] + 5, ':'));
 }
 
-char	*get_cmd_path(char	*cmd, char **envp)
+char	*get_cmd_path(char *cmd, char **envp)
 {
 	char	**paths;
-	char	*full_path;
+	char	*path;
+	char	*cmd_path;
 	int		i;
 
-	i = 0;
-	if (ft_strchr(cmd, '/'))
-		return (cmd);
-	paths = get_paths(envp);
+	paths = get_paths(envp); // get_paths debe hacer split del PATH y devolver char**
 	if (!paths)
 		return (NULL);
+	i = 0;
 	while (paths[i])
 	{
-		full_path = ft_strjoin(paths[i], "/");
-		full_path = ft_strjoin(full_path, cmd);
-		if (access(full_path, X_OK) == 0)
+		path = ft_strjoin(paths[i], "/");
+		if (!path)
 		{
-			free(paths);
-			return (full_path);
+			free_split(paths);
+			return (NULL);
 		}
-		free (full_path);
+		cmd_path = ft_strjoin(path, cmd);
+		free(path);
+		if (!cmd_path)
+		{
+			free_split(paths);
+			return (NULL);
+		}
+		if (access(cmd_path, X_OK) == 0)
+		{
+			free_split(paths);
+			return (cmd_path);
+		}
+		free(cmd_path);
 		i++;
 	}
-	free(paths);
+	free_split(paths);
 	return (NULL);
 }
+

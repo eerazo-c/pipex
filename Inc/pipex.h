@@ -6,7 +6,7 @@
 /*   By: elerazo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 17:04:54 by elerazo-          #+#    #+#             */
-/*   Updated: 2025/05/11 01:27:05 by elerazo          ###   ########.fr       */
+/*   Updated: 2025/05/12 23:33:21 by elerazo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PIPEX_H
@@ -29,12 +29,17 @@ typedef struct s_pipex
 	char	*outfile;
 	char	*cmd1_path;
 	char	*cmd2_path;
+	char	*path;
+	char	**args;
 	char	**envp;
 	char	**cmd1_args;
 	char	**cmd2_args;
 	int		infile_fd;
 	int		outfile_fd;
 	int		pipe_fd[2];
+	int		fd[2];
+	int		doc[2];
+	int		pid[2];
 }				t_pipex;
 
 //prototipo de funciones
@@ -46,8 +51,10 @@ int		open_file(t_pipex *pipex, char **av);
 int		created_pipex(t_pipex *pipex);
 void	free_pipex(t_pipex *pipex);
 void	free_matriz(char **av);
+void	free_split(char **arr);
 void	execute_cmds(t_pipex *pipex);
 void	execute_first_cmds(t_pipex *pipex);
 void	execute_second_cmds(t_pipex *pipex);
+void	ft_close_fd(t_pipex *pipex);
 
 #endif
