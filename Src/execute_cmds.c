@@ -1,4 +1,14 @@
-//header
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute_cmds.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: elerazo- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/13 13:15:59 by elerazo-          #+#    #+#             */
+/*   Updated: 2025/05/13 13:19:47 by elerazo-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "pipex.h"
 
 void	execute_second_cmds(t_pipex *pipex)
@@ -26,7 +36,7 @@ void	execute_first_cmds(t_pipex *pipex)
 void	execute_cmds(t_pipex *pipex)
 {
 	pid_t	pid1;
-	pid_t	pid2;	
+	pid_t	pid2;
 
 	pid1 = fork();
 	if (pid1 < 0)
@@ -39,7 +49,7 @@ void	execute_cmds(t_pipex *pipex)
 	pid2 = fork();
 	if (pid1 < 0)
 	{
-		perror ("fork 2");
+		perror("fork 2");
 		return ;
 	}
 	if (pid2 == 0)
@@ -49,90 +59,3 @@ void	execute_cmds(t_pipex *pipex)
 	waitpid(pid1, NULL, 0);
 	waitpid(pid2, NULL, 0);
 }
-
-char	**get_paths(char **envp)
-{
-	int		i;
-
-	i = 0;
-	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
-		i++;
-	if (!envp[i])
-		return (NULL);
-	return (ft_split(envp[i] + 5, ':'));
-}
-
-static char	*check_paths(char **paths, char *cmd)
-{
-	char	*path;
-	char	*cmd_path;
-	int		i;
-
-	i = 0;
-	while (paths[i])
-	{
-		path = ft_strjoin(paths[i], "/");
-		if (!path)
-			return (NULL);
-		cmd_path = ft_strjoin(path, cmd);
-		free(path);
-		if (!cmd_path)
-			return (NULL);
-		if (access(cmd_path, X_OK) == 0)
-			return (cmd_path);
-		free(cmd_path);
-		i++;
-	}
-	return (NULL);
-}
-
-char	*get_cmd_path(char *cmd, char **envp)
-{
-	char	**paths;
-	char	*cmd_path;
-
-	paths = get_paths(envp);
-	if (!paths)
-		return (NULL);
-	cmd_path = check_paths(paths, cmd);
-	free_split(paths);
-	return (cmd_path);
-}
-/*
-char	*get_cmd_path(char *cmd, char **envp)
-{
-	char	**paths;
-	char	*path;
-	char	*cmd_path;
-	int		i;
-
-	paths = get_paths(envp); // get_paths debe hacer split del PATH y devolver char**
-	if (!paths)
-		return (NULL);
-	i = 0;
-	while (paths[i])
-	{
-		path = ft_strjoin(paths[i], "/");
-		if (!path)
-		{
-			free_split(paths);
-			return (NULL);
-		}
-		cmd_path = ft_strjoin(path, cmd);
-		free(path);
-		if (!cmd_path)
-		{
-			free_split(paths);
-			return (NULL);
-		}
-		if (access(cmd_path, X_OK) == 0)
-		{
-			free_split(paths);
-			return (cmd_path);
-		}
-		free(cmd_path);
-		i++;
-	}
-	free_split(paths);
-	return (NULL);
-}*/

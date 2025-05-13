@@ -6,7 +6,7 @@
 /*   By: elerazo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 14:30:29 by elerazo-          #+#    #+#             */
-/*   Updated: 2025/05/13 00:20:48 by elerazo          ###   ########.fr       */
+/*   Updated: 2025/05/13 17:26:45 by elerazo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
@@ -27,7 +27,10 @@ int	open_file(t_pipex *pipex, char **av)
 {
 	pipex->infile_fd = open(av[1], O_RDONLY);
 	if (pipex->infile_fd < 0)
-		return (perror("Fallo al abrir el infile\n"), -1);
+	{
+		perror("Fallo al abrir el infile\n");
+		return (-1);
+	}
 	pipex->outfile_fd = open(av[4], O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (pipex->outfile_fd < 0)
 		return (perror("Fallo outfile\n"), -1);
@@ -36,7 +39,7 @@ int	open_file(t_pipex *pipex, char **av)
 
 void	free_split(char **arr)
 {
-	int i;
+	int	i;
 
 	if (!arr)
 		return ;
@@ -61,15 +64,10 @@ void	free_pipex(t_pipex *pipex)
 		free(pipex->cmd1_path);
 	if (pipex->cmd2_path)
 		free(pipex->cmd2_path);
-	 if (pipex->infile_fd != -1)
-        close(pipex->infile_fd);
-    if (pipex->outfile_fd != -1)
-        close(pipex->outfile_fd);
-	/*ft_close_fd(pipex);
-    free_matriz(pipex->cmd1_args);
-    free_matriz(pipex->cmd2_args);
-    free(pipex->cmd1_path);
-    free(pipex->cmd2_path);*/
+	if (pipex->infile_fd != -1)
+		close(pipex->infile_fd);
+	if (pipex->outfile_fd != -1)
+		close(pipex->outfile_fd);
 }
 
 void	free_matriz(char **av)

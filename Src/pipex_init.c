@@ -6,7 +6,7 @@
 /*   By: elerazo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:03:21 by elerazo-          #+#    #+#             */
-/*   Updated: 2025/05/13 00:36:31 by elerazo          ###   ########.fr       */
+/*   Updated: 2025/05/13 17:25:35 by elerazo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
@@ -23,11 +23,14 @@ int	created_pipe(t_pipex *pipex)
 
 int	init_pipex(t_pipex *pipex, char **av, char **envp)
 {
+	if (!av[2] || av[2][0] == '\0')
+		return (write(2, "zsh: no such file or directory:", 30), -1);
+	if (!av[3] || av[3][0] == '\0')
+		return (write(2, "zsh: no such file or directory:", 30), -1);
 	pipex->infile_fd = -1;
 	pipex->outfile_fd = -1;
 	pipex->pipe_fd[0] = -1;
 	pipex->pipe_fd[1] = -1;
-
 	pipex->infile = av[1];
 	pipex->outfile = av[4];
 	pipex->envp = envp;
@@ -35,14 +38,10 @@ int	init_pipex(t_pipex *pipex, char **av, char **envp)
 	pipex->cmd2_args = ft_split(av[3], ' ');
 	if (!pipex->cmd1_args || !pipex->cmd2_args)
 		return (-1);
-	//para que funcione los comandos
 	pipex->cmd1_path = get_cmd_path(pipex->cmd1_args[0], envp);
 	pipex->cmd2_path = get_cmd_path(pipex->cmd2_args[0], envp);
 	if (!pipex->cmd1_path || !pipex->cmd2_path)
-	{
-		write (2, "Command not found\n", 18);
 		return (-1);
-	}
 	return (0);
 }
 

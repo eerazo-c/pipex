@@ -6,7 +6,7 @@
 /*   By: elerazo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 17:04:54 by elerazo-          #+#    #+#             */
-/*   Updated: 2025/05/12 23:33:21 by elerazo          ###   ########.fr       */
+/*   Updated: 2025/05/13 13:23:01 by elerazo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PIPEX_H
@@ -15,8 +15,8 @@
 //# <biblioteca.h>
 # include <unistd.h>
 # include <fcntl.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include "../library/printf/ft_printf.h"
