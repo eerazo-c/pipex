@@ -6,7 +6,7 @@
 /*   By: elerazo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 17:04:54 by elerazo-          #+#    #+#             */
-/*   Updated: 2025/05/13 13:23:01 by elerazo-         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:47:06 by elerazo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef PIPEX_H
@@ -49,6 +49,7 @@ char	*get_cmd_path(char *cmd, char **envp);
 int		init_pipex(t_pipex *pipex, char **av, char **envp);
 int		open_file(t_pipex *pipex, char **av);
 int		created_pipex(t_pipex *pipex);
+int		cmp_cmds(t_pipex *pipex);
 void	free_pipex(t_pipex *pipex);
 void	free_matriz(char **av);
 void	free_split(char **arr);

@@ -6,7 +6,7 @@
 /*   By: elerazo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:03:21 by elerazo-          #+#    #+#             */
-/*   Updated: 2025/05/13 17:25:35 by elerazo-         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:53:12 by elerazo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
@@ -41,6 +41,26 @@ int	init_pipex(t_pipex *pipex, char **av, char **envp)
 	pipex->cmd1_path = get_cmd_path(pipex->cmd1_args[0], envp);
 	pipex->cmd2_path = get_cmd_path(pipex->cmd2_args[0], envp);
 	if (!pipex->cmd1_path || !pipex->cmd2_path)
+		cmp_cmds(pipex);
+	return (0);
+}
+
+int	cmp_cmds(t_pipex *pipex)
+{
+	int	flag;
+
+	flag = 0;
+	if (!pipex->cmd1_path)
+	{
+		ft_printf("bash: %s command not found\n", pipex->cmd1_args[0]);
+		flag++;
+	}
+	if (!pipex->cmd2_path)
+	{
+		ft_printf("bash: %s command not found\n", pipex->cmd2_args[0]);
+		flag++;
+	}
+	if (flag > 0)
 		return (-1);
 	return (0);
 }

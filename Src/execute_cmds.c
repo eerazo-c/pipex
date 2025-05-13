@@ -6,7 +6,7 @@
 /*   By: elerazo- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 13:15:59 by elerazo-          #+#    #+#             */
-/*   Updated: 2025/05/13 13:19:47 by elerazo-         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:51:43 by elerazo-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "pipex.h"
@@ -18,7 +18,6 @@ void	execute_second_cmds(t_pipex *pipex)
 	close(pipex->pipe_fd[0]);
 	close(pipex->pipe_fd[1]);
 	execve(pipex->cmd2_path, pipex->cmd2_args, pipex->envp);
-	perror("Error al ejecutar cmd2");
 	exit(EXIT_FAILURE);
 }
 
@@ -29,7 +28,6 @@ void	execute_first_cmds(t_pipex *pipex)
 	close(pipex->pipe_fd[0]);
 	close(pipex->pipe_fd[1]);
 	execve(pipex->cmd1_path, pipex->cmd1_args, pipex->envp);
-	perror("Error al ejecutar cmd1");
 	exit(EXIT_FAILURE);
 }
 
